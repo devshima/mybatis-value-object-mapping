@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.domain.repository.UserRepository">
+  <select id="findById" resultMap="UserMap" parameterType="map">
+    select id, user_name, register_date from users where id = #{userId.value}
+  </select>
+
+  <resultMap id="UserMap" type="com.example.demo.domain.model.User">
+      <association property="userId" javaType="com.example.demo.domain.model.UserId">
+        <constructor>
+          <arg name="value" column="id"/>
+        </constructor>
+      </association>
+      <association property="userName" javaType="com.example.demo.domain.model.UserName">
+        <constructor>
+          <arg name="value" column="user_name"/>
+        </constructor>
+      </association>
+      <association property="registerDate" javaType="com.example.demo.domain.model.RegisterDate">
+        <constructor>
+          <arg name="value" column="register_date"/>
+        </constructor>
+      </association>
+  </resultMap>
+
+</mapper>
